@@ -1,0 +1,585 @@
+{
+    "key": "_template",
+    "name": "Template",
+    "currency": "dollar",
+    "images": {
+        "logo": "logo.jpg",
+        "officer": "profile_image.png"
+    },
+    "text": {
+        "company_name": "Super Mobile Ltd",
+        "headquarter": "New Delhi",
+        "description": "Revolutionizing the way we communicate, our company offers cutting-edge technology solutions for businesses worldwide. Our expert team is dedicated to delivering exceptional customer service and innovative strategies to help our clients stay ahead of the curve.",
+        "objective": "As our new CEO, your objective is to drive growth and profitability while maintaining our commitment to innovation and customer satisfaction. We are confident in your ability to lead the company towards continued success and look forward to seeing your vision come to fruition.",
+        "industry": "Phone Manufacturing",
+        "officer_name": "Celina Diaz",
+        "officer_title": "Chairperson"
+    },
+    "financials": {
+        "max_shares_issue_pct": 0,
+        "dividend_rate": 0,
+        "max_debt_borrow_pct": 0,
+        "interest_rate": 0,
+        "debt_duration": 0,
+        "revenue": 0,
+        "profit": 0,
+        "profitMargin": 0,
+        "stock_price": 0,
+        "changeInStockPrice": 0,
+        "changePctStockPrice": 0,
+        "marketShare": 0,
+        "unitsSold": 0,
+        "material_cost": 0,
+        "labour_cost": 0,
+        "inventory_cost": 0,
+        "gross_contribution": 0,
+        "depreciation_plant": 0,
+        "depreciation_research": 0,
+        "total_depreciation": 0,
+        "promotions": 0,
+        "sales_force": 0,
+        "service_force": 0,
+        "admin": 0,
+        "interest": 0,
+        "taxes": 0,
+        "change_in_inventory": 0,
+        "cashflow_operations": 0,
+        "cashflow_plant": 0,
+        "cashflow_research": 0,
+        "cashflow_investments": 0,
+        "dividend": 0,
+        "stock_sale": 0,
+        "cashflow_financing": 0,
+        "starting_cash": 0,
+        "ending_cash": 0,
+        "change_in_cash": 0,
+        "shares_issued": 0,
+        "issue_shares": 0,
+        "debt": [
+            {
+                "amount": 0,
+                "periods_serviced": 0
+            }
+        ],
+        "debt_due": 0,
+        "borrow_debt": 0,
+        "emergency_loan_amount": 0,
+        "emergency_loan_int_pct": 0,
+        "min_cash_balance_required": 0,
+        "fixed_marketing_overhead_cost": 0,
+        "sales_tax_rate": 0,
+        "corporate_tax_rate_2": 0,
+        "avg_salary": 0,
+        "avg_hiring_cost": 0,
+        "avg_firing_cost": 0,
+        "existing_workforce": 0,
+        "required_workforce": 0,
+        "planned_workforce": 0,
+        "salary_cost": 0,
+        "recruitment_cost": 0,
+        "employment_cost": 0,
+        "innovation_budget": 0,
+        "training_budget": 0,
+        "productivity_increase": 0,
+        "efficiency_increase": 0
+    },
+    "defaults": {
+        "number_of_teams": 12,
+        "capacity": 0,
+        "capacity_chart_color": "pink",
+        "production_chart_color": "blue",
+        "capacity_chart_border_color": "#f6b5c3"
+    },
+    "demand_change_criteria": {
+        "demand_variance_min": 0,
+        "demand_variance_max": 0
+    },
+    "market": {
+        "segments": [
+            {
+                "idx": 0,
+                "name": "Affluent",
+                "description": "Affluents want to go for the best gadget in the market. Typically people who would buy the latest flagship phone. They do not mind paying if the phone meets their need.",
+                "ideal_price": 0,
+                "market_size": 0,
+                "color": "#376BB4",
+                "demand_distribution": 0
+            },
+            {
+                "idx": 1,
+                "name": "Aspirational",
+                "description": "Aspirationals opt for mid-range handsets that promise to deliver high performance but are still affordable. Many value seekers have had experience of using smartphone before and wish to upgrade.",
+                "ideal_price": 0,
+                "market_size": 0,
+                "color": "#D22C31",
+                "demand_distribution": 0
+            },
+            {
+                "idx": 2,
+                "name": "Budget Conscious",
+                "description": "Budget Conscious people do not want to overspend on devices and a basic configuration is enough for their needs. For a lot of these people this is their first smartphone.",
+                "ideal_price": 0,
+                "market_size": 0,
+                "color": "#55A93E",
+                "demand_distribution": 0
+            }
+        ],
+        "channels": [
+            {
+                "idx": 0,
+                "name": "Online Stores",
+                "description": "They comprise of nationalized retail chains and online channels. While our current sales through this channel are not very high, market indicates that more and more customers are moving towards this channel.",
+                "color": "#52894E"
+            },
+            {
+                "idx": 1,
+                "name": "Retail Stores",
+                "description": "Value-seekers and Affluents are known to prefer this channel, primarily because of a better and customized shopping experience.",
+                "color": "#D72C39"
+            },
+            {
+                "idx": 2,
+                "name": "Distributors",
+                "description": "Reports show that the Conservatives segment has an inclination towards this channel owing to the perception of getting extra discounts as compared to the company owned stores.",
+                "color": "#346dB4"
+            }
+        ]
+    },
+    "product": {
+        "type": "Mobile Phone",
+        "overhead_cost": 0,
+        "cost": "fn:product_cost",
+        "margin": "fn:margin",
+        "margin_pct": "fn:margin_pct",
+        "product_manpower": 0.2,
+        "specs": [
+            {
+                "feature": "Memory",
+                "idx": 0,
+                "values": [
+                    {
+                        "value": "1GB",
+                        "cost": 100,
+                        "weight": 20,
+                        "idx": 0
+                    },
+                    {
+                        "value": "4GB",
+                        "cost": 180,
+                        "weight": 90,
+                        "idx": 2
+                    },
+                    {
+                        "value": "2GB",
+                        "cost": 150,
+                        "weight": 50,
+                        "idx": 1
+                    }
+                ]
+            },
+            {
+                "feature": "Camera",
+                "idx": 1,
+                "values": [
+                    {
+                        "value": "4MP",
+                        "cost": 100,
+                        "weight": 20,
+                        "idx": 0
+                    },
+                    {
+                        "value": "8MP",
+                        "cost": 150,
+                        "weight": 50,
+                        "idx": 1
+                    },
+                    {
+                        "value": "16MP",
+                        "cost": 180,
+                        "weight": 90,
+                        "idx": 2
+                    }
+                ]
+            },
+            {
+                "feature": "Screen Size",
+                "idx": 2,
+                "values": [
+                    {
+                        "value": "5\"",
+                        "cost": 100,
+                        "weight": 20,
+                        "idx": 0
+                    },
+                    {
+                        "value": "7\"",
+                        "cost": 150,
+                        "weight": 50,
+                        "idx": 1
+                    },
+                    {
+                        "value": "9\"",
+                        "cost": 180,
+                        "weight": 90,
+                        "idx": 2
+                    }
+                ]
+            }
+        ]
+    },
+    "products": [
+        {
+            "name": "Product 1",
+            "target": "Budget Conscious",
+            "specs": {
+                "Memory": "1GB",
+                "Camera": "4MP",
+                "Screen Size": "5\""
+            },
+            "plannedProduction": 0,
+            "cost": 0,
+            "salesPrice": 0,
+            "margin": 0,
+            "inventory": 0,
+            "idx": 0,
+            "unitsSold": 0,
+            "revenue": 0,
+            "color": "#342aca",
+            "marketing": {
+                "advertising_budget": 0,
+                "promotions_budget": 0
+            },
+            "channelDistribution": {
+                "Online Stores": "33",
+                "Retail Stores": "33",
+                "Distributors": "34"
+            },
+            "channelInventory": {
+                "Online Stores": 0,
+                "Retail Stores": 0,
+                "Distributors": 0
+            }
+        },
+        {
+            "name": "Product 2",
+            "target": "Affluent",
+            "specs": {
+                "Memory": "2GB",
+                "Camera": "8MP",
+                "Screen Size": "7\""
+            },
+            "plannedProduction": 0,
+            "cost": 0,
+            "salesPrice": 0,
+            "margin": 0,
+            "inventory": 0,
+            "idx": 2,
+            "unitsSold": 0,
+            "revenue": 0,
+            "color": "#e46faf",
+            "marketing": {
+                "advertising_budget": 0,
+                "promotions_budget": 0
+            },
+            "channelDistribution": {
+                "Online Stores": "23",
+                "Retail Stores": "47",
+                "Distributors": "30"
+            },
+            "channelInventory": {
+                "Online Stores": 0,
+                "Retail Stores": 0,
+                "Distributors": 0
+            }
+        },
+        {
+            "name": "Product 3",
+            "target": "Aspirational",
+            "specs": {
+                "Memory": "4GB",
+                "Camera": "16MP",
+                "Screen Size": "9\""
+            },
+            "plannedProduction": 0,
+            "cost": 0,
+            "salesPrice": 0,
+            "margin": 0,
+            "inventory": 0,
+            "idx": 1,
+            "unitsSold": 0,
+            "revenue": 0,
+            "color": "#08ce1f",
+            "marketing": {
+                "advertising_budget": 0,
+                "promotions_budget": 0
+            },
+            "channelDistribution": {
+                "Online Stores": "23",
+                "Retail Stores": "47",
+                "Distributors": "30"
+            },
+            "channelInventory": {
+                "Online Stores": 0,
+                "Retail Stores": 0,
+                "Distributors": 0
+            }
+        }
+    ],
+    "price_constants": {},
+    "plants": {
+        "selected": "none",
+        "utilisation": 0,
+        "production": 0,
+        "capacity": 0,
+        "options": [
+            {
+                "idx": 0,
+                "label": "None",
+                "capacity": 0,
+                "investment": 0,
+                "icon": "none_plant.png"
+            },
+            {
+                "idx": 1,
+                "label": "Small",
+                "capacity": 0,
+                "investment": 0,
+                "icon": "small_plant.png"
+            },
+            {
+                "idx": 2,
+                "label": "Medium",
+                "capacity": 0,
+                "investment": 0,
+                "icon": "medium_plant.png"
+            },
+            {
+                "idx": 3,
+                "label": "Large",
+                "capacity": 0,
+                "investment": 0,
+                "icon": "large_plant.png"
+            }
+        ]
+    },
+    "vars": {
+        "innovation_impact_factor": 0,
+        "training_impact_factor": 0
+    },
+    "exp": {
+        "innovation_impact": "($innovation_budget/(caseStudy.vars.innovation_impact_factor*gameData.financials.planned_workforce)).toFixed(2)",
+        "training_impact": "($training_budget/(caseStudy.vars.training_impact_factor*gameData.financials.planned_workforce)).toFixed(2)"
+    },
+    "initial_segment_demand": [
+        8000,
+        9000,
+        9500,
+        6000,
+        10000
+    ],
+    "initial_scores": {
+        "score": 0,
+        "stock_price": 0,
+        "profits": 0,
+        "marketShare": 0,
+        "customerService": 0,
+        "utilization": 0,
+        "fulfilment": 0,
+        "continuousImprovement": 0,
+        "innovation": 0
+    },
+    "quarters": {
+        "labels": {
+            "0": "Q4-LY",
+            "1": "Q1",
+            "2": "Q2",
+            "3": "Q3",
+            "4": "Q4"
+        },
+        "demandMessagesUp": {
+            "0": {
+                "title": "Selfie Mania!",
+                "text": [
+                    "A couple of govt. initiatives have really pushed up the demand. Reduction in tax slabs has left people with more disposable income to spend and purchase goods. The demand for consumer goods is expected to go up.",
+                    "People have started shifting towards bigger devices with better cameras. Due to the rise of digitized content, no amount of memory (storage) seems to be sufficient!"
+                ]
+            },
+            "1": {
+                "title": "Selfie Mania!",
+                "text": [
+                    "A couple of govt. initiatives have really pushed up the demand. Reduction in tax slabs has left people with more disposable income to spend and purchase goods. The demand for consumer goods is expected to go up.",
+                    "People have started shifting towards bigger devices with better cameras. Due to the rise of digitized content, no amount of memory (storage) seems to be sufficient!"
+                ]
+            },
+            "2": {
+                "title": "Selfie Mania!",
+                "text": [
+                    "A couple of govt. initiatives have really pushed up the demand. Reduction in tax slabs has left people with more disposable income to spend and purchase goods. The demand for consumer goods is expected to go up.",
+                    "People have started shifting towards bigger devices with better cameras. Due to the rise of digitized content, no amount of memory (storage) seems to be sufficient!"
+                ]
+            },
+            "3": {
+                "title": "Selfie Mania!",
+                "text": [
+                    "A couple of govt. initiatives have really pushed up the demand. Reduction in tax slabs has left people with more disposable income to spend and purchase goods. The demand for consumer goods is expected to go up.",
+                    "People have started shifting towards bigger devices with better cameras. Due to the rise of digitized content, no amount of memory (storage) seems to be sufficient!"
+                ]
+            },
+            "4": {
+                "title": "Selfie Mania!",
+                "text": [
+                    "A couple of govt. initiatives have really pushed up the demand. Reduction in tax slabs has left people with more disposable income to spend and purchase goods. The demand for consumer goods is expected to go up.",
+                    "People have started shifting towards bigger devices with better cameras. Due to the rise of digitized content, no amount of memory (storage) seems to be sufficient!"
+                ]
+            }
+        },
+        "demandMessagesDown": {
+            "0": {
+                "title": "Economic Downturn!",
+                "text": [
+                    "Recent tax increases and higher inflation have really hit the consumers hard. This has lead to reduced sales of luxury items and electronic devices.",
+                    "There is reduced demand for new phones in the market as people are wary of switching due to current market situation."
+                ]
+            },
+            "1": {
+                "title": "Economic Downturn!",
+                "text": [
+                    "Recent tax increases and higher inflation have really hit the consumers hard. This has lead to reduced sales of luxury items and electronic devices.",
+                    "There is reduced demand for new phones in the market as people are wary of switching due to current market situation."
+                ]
+            },
+            "2": {
+                "title": "Economic Downturn!",
+                "text": [
+                    "Recent tax increases and higher inflation have really hit the consumers hard. This has lead to reduced sales of luxury items and electronic devices.",
+                    "There is reduced demand for new phones in the market as people are wary of switching due to current market situation."
+                ]
+            },
+            "3": {
+                "title": "Economic Downturn!",
+                "text": [
+                    "Recent tax increases and higher inflation have really hit the consumers hard. This has lead to reduced sales of luxury items and electronic devices.",
+                    "There is reduced demand for new phones in the market as people are wary of switching due to current market situation."
+                ]
+            },
+            "4": {
+                "title": "Economic Downturn!",
+                "text": [
+                    "Recent tax increases and higher inflation have really hit the consumers hard. This has lead to reduced sales of luxury items and electronic devices.",
+                    "There is reduced demand for new phones in the market as people are wary of switching due to current market situation."
+                ]
+            }
+        }
+    },
+    "special_projects_template": {
+        "key": "",
+        "idx": 0,
+        "name": "Special Project Name",
+        "image": "images/blank.jpg",
+        "description": "Description of the project.",
+        "options": []
+    },
+    "options_template": {
+        "idx": 0,
+        "label": "Invest",
+        "investment": 0,
+        "failure_risk": 0
+    },
+    "special_projects": [],
+    "kpi_criteria": {
+        "stock_price": 0,
+        "profits": 0,
+        "marketShare": 0,
+        "customer_service_level": 0,
+        "utilization": 0,
+        "fulfilment": 0,
+        "continuous_improvement": 0,
+        "innovation": 0,
+        "stock_price_benchmark": 0,
+        "profit_benchmark": 0,
+        "market_share_benchmark": 0,
+        "service_benchmark": 0,
+        "utilisation_benchmark": 0,
+        "fulfilment_benchmark": 0,
+        "ci_benchmark": 0,
+        "innovation_benchmark": 0
+    },
+    "demand_criteria": {},
+    "_themeOverrides": {},
+    "_functionOverrides": {},
+    "_formatOverrides": {},
+    "_hookOverrides": {},
+    "progressBarColors": {
+        "danger": 0,
+        "warning": 33,
+        "success": 67
+    },
+    "kpmMessages": {
+        "stock_price": {
+            "danger": "The stock is underperforming. You need to take decisions to improve its performance.",
+            "warning": "Average performing stock. Investors are not yet convinced about the company's potential.",
+            "success": "The stock is doing well. Keep it up!"
+        },
+        "profits": {
+            "danger": "The stock is underperforming. You need to take decisions to improve its performance.",
+            "warning": "Average performing stock. Investors are not yet convinced about the company's potential.",
+            "success": "The stock is doing well. Keep it up!"
+        },
+        "marketShare": {
+            "danger": "The stock is underperforming. You need to take decisions to improve its performance.",
+            "warning": "Average performing stock. Investors are not yet convinced about the company's potential.",
+            "success": "The stock is doing well. Keep it up!"
+        },
+        "customerService": {
+            "danger": "The stock is underperforming. You need to take decisions to improve its performance.",
+            "warning": "Average performing stock. Investors are not yet convinced about the company's potential.",
+            "success": "The stock is doing well. Keep it up!"
+        },
+        "utilization": {
+            "danger": "The stock is underperforming. You need to take decisions to improve its performance.",
+            "warning": "Average performing stock. Investors are not yet convinced about the company's potential.",
+            "success": "The stock is doing well. Keep it up!"
+        },
+        "fulfilment": {
+            "danger": "The stock is underperforming. You need to take decisions to improve its performance.",
+            "warning": "Average performing stock. Investors are not yet convinced about the company's potential.",
+            "success": "The stock is doing well. Keep it up!"
+        },
+        "continuousImprovement": {
+            "danger": "The stock is underperforming. You need to take decisions to improve its performance.",
+            "warning": "Average performing stock. Investors are not yet convinced about the company's potential.",
+            "success": "The stock is doing well. Keep it up!"
+        },
+        "innovation": {
+            "danger": "The stock is underperforming. You need to take decisions to improve its performance.",
+            "warning": "Average performing stock. Investors are not yet convinced about the company's potential.",
+            "success": "The stock is doing well. Keep it up!"
+        }
+    },
+    "demandMessages": {
+        "general": [
+            {
+                "title": "Selfie Mania!",
+                "text": "A couple of govt. initiatives have really pushed up the demand. Reduction in tax slabs has left people with more disposable income to spend and purchase goods. The demand for consumer goods is expected to go up."
+            }
+        ],
+        "neutral": [
+            {
+                "title": "Selfie Mania!",
+                "text": "A couple of govt. initiatives have really pushed up the demand. Reduction in tax slabs has left people with more disposable income to spend and purchase goods. The demand for consumer goods is expected to go up."
+            }
+        ],
+        "increase": [
+            {
+                "title": "Selfie Mania!",
+                "text": "A couple of govt. initiatives have really pushed up the demand. Reduction in tax slabs has left people with more disposable income to spend and purchase goods. The demand for consumer goods is expected to go up."
+            }
+        ],
+        "decrease": [
+            {
+                "title": "Selfie Mania!",
+                "text": "A couple of govt. initiatives have really pushed up the demand. Reduction in tax slabs has left people with more disposable income to spend and purchase goods. The demand for consumer goods is expected to go up."
+            }
+        ]
+    }
+}

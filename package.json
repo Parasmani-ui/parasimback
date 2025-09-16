@@ -1,0 +1,25 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "nginx-start": "nginx",
+        "nginx-stop": "@taskkill /f /im nginx.exe",
+        "nginx-list": "tasklist /fi \"imagename eq nginx.exe\"",
+        "dump-parasim": "mongodump --db parasim --out dump",
+        "dump-bizlab": "mongodump --db bizlab --out dump",
+        "dump-parasim-web": "mongodump --db parasim_web --out dump",
+        "dump-bizlab-web": "mongodump --db bizlab_web --out dump",
+        "restore-parasim": "mongorestore --db parasim",
+        "restore-bizlab": "mongorestore --db bizlab",
+        "restore-parasim-web": "mongorestore --db parasim_web",
+        "restore-bizlab-web": "mongorestore --db bizlab_web",
+        "restore-different-example": "mongorestore --nsInclude=\"bizlab.*\" --nsFrom=\"bizlab.*\" --nsTo=\"parasim_test.*\" ./dump-main-folder"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "server": "file:"
+    }
+}

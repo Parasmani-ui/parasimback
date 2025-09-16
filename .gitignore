@@ -21,3 +21,6 @@ CODEBASE_ANALYSIS_REPORT.md
 dump/
 
 server/_temp/create_users.js
+
+/app
+app

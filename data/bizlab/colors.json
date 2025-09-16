@@ -1,0 +1,13 @@
+{
+    "--header_nav_text_color": "#e6f1f3",
+    "--header_background_color": "#3d4143",
+    "--sidebar_background_color": "#3d4143",
+    "--parentnav_background_color": "#81838f",
+    "--sidebar_collapse_button_background_color": "#81838f",
+    "--toolbar_background_color": "#add8e6",
+    "--table-heading-background-color": "#81838f",
+    "--card-header-background": "#93b1c6",
+    "--brand_background_color": "#3d4143",
+    "--icon_color": "#cccccc",
+    "--sidebar_background_color_active": "#000000"
+}
