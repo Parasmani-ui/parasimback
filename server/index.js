@@ -20,7 +20,7 @@ const args = require('minimist')(process.argv);
 const API_URL = process.env.REACT_APP_API_URL;
 
 const port = args.port;
-const API_URL = process.env.REACT_APP_API_URL;
+
 
 
 const logFileName = () => {
