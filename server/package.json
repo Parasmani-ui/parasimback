@@ -1,23 +1,17 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend API for Business Simulation",
   "main": "index.js",
   "scripts": {
-    "debug-prod": "nodemon --inspect index.js --port 5000",
-    "test-prod": "nodemon --inspect index.js --port 5000",
-    "local": "nodemon --inspect=9229 index.js --port 5000",
-    "start": "pm2 start index.js -i max --name live -- --port 5000",
-    "console": "pm2 monit",
-    "stop": "pm2 stop index.js",
-    "list": "pm2 list",
-    "logs": "pm2 logs",
-    "restart": "pm2 restart index.js -i max --name live -- --port 5000",
-    "reload": "pm2 restart index.js -i max --name live -- --port 5000",
-    "start-test": "node index.js --port 5001"
+    "dev": "nodemon index.js --port 5000",
+    "start": "node index.js"
   },
-  "author": "",
+  "author": "Vikash Lanjhikar",
   "license": "ISC",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@tensorflow/tfjs": "^4.5.0",
     "bcrypt": "^5.1.0",
@@ -35,8 +29,6 @@
     "multer": "^1.4.5-lts.1",
     "node-gyp": "^9.3.1",
     "node-pre-gyp": "^0.17.0",
-    "pm2": "^5.3.0",
-    "server": "file:",
     "socket.io": "^4.6.1",
     "ts-node": "^10.9.1",
     "uuid": "^9.0.0",
