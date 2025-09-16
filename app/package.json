@@ -39,6 +39,25 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
+  "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/plugin-transform-class-properties": "^7.22.5",
+    "@babel/plugin-transform-react-jsx": "^7.22.9",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-react": "^7.27.1",
+    "@types/node": "^20.1.0",
+    "mux.js": "^6.3.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-class-properties"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -50,11 +69,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/plugin-transform-class-properties": "^7.22.5",
-    "@types/node": "^20.1.0",
-    "mux.js": "^6.3.0"
   }
 }
