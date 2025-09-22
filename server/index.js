@@ -62,7 +62,11 @@ const databases = {
   "https://bizlab_demo.parasim.in": 'bizlab_demo',
   "https://aimabizlabedge.com": 'bizlab',
   "https://parasim.in": 'parasim',
-  "http://parasim.local": 'parasim'
+  "http://parasim.local": 'parasim',
+  // Add Vercel domains - replace with your actual Vercel deployment URLs
+  "https://parasim.vercel.app": 'parasim',
+  "https://parasim.vercel.app": 'parasim',
+  "https://parasim.vercel.app": 'parasim'
 };
 
 const data_folder = {
@@ -80,7 +84,11 @@ const data_folder = {
   "https://bizlab_demo.parasim.in": 'bizlab',
   "https://aimabizlabedge.com": 'bizlab',
   "https://parasim.in": 'parasim',
-  "http://parasim.local": 'parasim'
+  "http://parasim.local": 'parasim',
+  // Add Vercel domains - replace with your actual Vercel deployment URLs
+  "https://parasim.vercel.app/": 'parasim',
+  "https://parasim.vercel.app/": 'parasim',
+  "https://parasim.vercel.app/": 'parasim'
 };
 
 // Create a connection pool for each database

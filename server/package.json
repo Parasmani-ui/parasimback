@@ -4,7 +4,9 @@
   "description": "Backend for Parasmani Simulation",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "echo 'No build step required for Node.js server'",
+    "dev": "node index.js --port=5000"
   },
   "engines": {
     "node": "20.x"
