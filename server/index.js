@@ -64,7 +64,9 @@ const databases = {
   "https://parasim.in": 'parasim',
   "http://parasim.local": 'parasim',
   // Add Vercel domains - replace with your actual Vercel deployment URLs
-  "https://parasim.vercel.app": 'parasim'
+  "https://parasim.vercel.app": 'parasim',
+  // Add Render backend domain for direct API access
+  "https://parasimback.onrender.com": 'parasim'
 };
 
 const data_folder = {
@@ -84,7 +86,9 @@ const data_folder = {
   "https://parasim.in": 'parasim',
   "http://parasim.local": 'parasim',
   // Add Vercel domains - replace with your actual Vercel deployment URLs
-  "https://parasim.vercel.app": 'parasim'
+  "https://parasim.vercel.app": 'parasim',
+  // Add Render backend domain for direct API access
+  "https://parasimback.onrender.com": 'parasim'
 };
 
 // Create a connection pool for each database
