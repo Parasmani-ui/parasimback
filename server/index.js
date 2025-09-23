@@ -64,8 +64,6 @@ const databases = {
   "https://parasim.in": 'parasim',
   "http://parasim.local": 'parasim',
   // Add Vercel domains - replace with your actual Vercel deployment URLs
-  "https://parasim.vercel.app": 'parasim',
-  "https://parasim.vercel.app": 'parasim',
   "https://parasim.vercel.app": 'parasim'
 };
 
@@ -86,9 +84,7 @@ const data_folder = {
   "https://parasim.in": 'parasim',
   "http://parasim.local": 'parasim',
   // Add Vercel domains - replace with your actual Vercel deployment URLs
-  "https://parasim.vercel.app/": 'parasim',
-  "https://parasim.vercel.app/": 'parasim',
-  "https://parasim.vercel.app/": 'parasim'
+  "https://parasim.vercel.app": 'parasim'
 };
 
 // Create a connection pool for each database
@@ -148,17 +144,21 @@ app.use((req, res, next) => {
     return;
   }
 
-  const client = new MongoClient('mongodb://127.0.0.1:27017/' + databases[host]);
+  // Use MongoDB Atlas connection string from environment variable
+  const mongoUri = process.env.MONGODB_URI || `mongodb://127.0.0.1:27017`;
+  const dbName = databases[host];
+  const client = new MongoClient(mongoUri);
 
   client.connect()
     .then(() => {
-      pools[host] = client.db();
-      console.info(`Connected to database ${databases[host]} for ${host}`);
+      pools[host] = client.db(dbName);
+      console.info(`Connected to database ${dbName} for ${host}`);
       req.database = pools[host];
       next();
     })
     .catch((err) => {
-      console.error(`Error connecting to database ${databases[host]} for ${host}:`, err);
+      console.error(`Error connecting to database ${dbName} for ${host}:`, err);
+      res.status(500).send('Database connection error');
     });
 });
 
