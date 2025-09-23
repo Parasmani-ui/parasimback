@@ -314,12 +314,27 @@ app.use('/api', async (req, res) => {
 // Serve files from public folder
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Serve React app
-app.use(express.static(path.join(__dirname, '../app/build')));
+// API status endpoint for health checks
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'success', 
+    message: 'Parasim Backend API is running', 
+    version: '1.0.0',
+    endpoints: {
+      api: '/api/*',
+      upload: '/upload/*',
+      downloads: '/download_*'
+    }
+  });
+});
 
-// Serve the React app for all other requests
+// Catch-all for undefined routes
 app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../app/build/index.html'));
+  res.status(404).json({ 
+    rc: 'endpoint_not_found', 
+    message: `Endpoint ${req.originalUrl} not found`,
+    available_endpoints: ['/api/*', '/upload/*', '/download_*']
+  });
 });
 
 const PORT = process.env.PORT || port;
