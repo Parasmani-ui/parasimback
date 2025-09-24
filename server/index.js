@@ -18,10 +18,7 @@ var io = null;
 const args = require('minimist')(process.argv);
 
 const API_URL = process.env.REACT_APP_API_URL;
-
 const port = args.port;
-
-
 
 const logFileName = () => {
   const now = new Date();
@@ -32,13 +29,8 @@ const connections = {};
 
 const myTransformStream = new Transform({
   transform(chunk, encoding, callback) {
-    // Call your function on the data here
     const modifiedChunk = myFunction(chunk);
-
-    // Send the modified data to the output stream
     this.push(modifiedChunk);
-
-    // Call the callback function to signal that the transformation is complete
     callback();
   }
 });
@@ -63,60 +55,33 @@ const databases = {
   "https://aimabizlabedge.com": 'bizlab',
   "https://parasim.in": 'parasim',
   "http://parasim.local": 'parasim',
-  // Add Vercel domains - replace with your actual Vercel deployment URLs
-  "https://parasim.vercel.app": 'parasim',
-  // Add Render backend domain for direct API access
-  "https://parasimback.onrender.com": 'parasim'
+  "https://parasim.vercel.app": 'parasim',        // ✅ Vercel frontend
+  "https://parasimback.onrender.com": 'parasim'   // ✅ Render backend
 };
 
-const data_folder = {
-  "http://localhost:3000": 'parasim',
-  "http://localhost:3500": 'bizlab',
-  "http://localhost:4000": 'bizlab',
-  "http://localhost:5000": 'parasim',
-  "https://game.parasim.in": 'parasim',
-  "https://demo.parasim.in": 'parasim',
-  "https://test.parasim.in": 'parasim_test',
-  "https://game.aimabizlabedge.com": 'bizlab',
-  "https://demo.aimabizlabedge.com": 'bizlab',
-  "https://test.aimabizlabedge.com": 'bizlab_test',
-  "https://bizlab.parasim.in": 'bizlab',
-  "https://bizlab_demo.parasim.in": 'bizlab',
-  "https://aimabizlabedge.com": 'bizlab',
-  "https://parasim.in": 'parasim',
-  "http://parasim.local": 'parasim',
-  // Add Vercel domains - replace with your actual Vercel deployment URLs
-  "https://parasim.vercel.app": 'parasim',
-  // Add Render backend domain for direct API access
-  "https://parasimback.onrender.com": 'parasim'
+const data_folder = { ...databases };
+
+// ---- CORS FIX ----
+const allowedOrigins = Object.keys(databases);
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS not allowed for this origin"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 };
-
-// Create a connection pool for each database
-//const clients = {};
-const pools = {};
-
-/*
-for (const domain in databases) {
-  if (databases.hasOwnProperty(domain)) {
-    clients[domain] = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
-  }
-}
-// allow cross origin requests
-var corsOptionsDelegate = function (req, callback) {
-  var corsOptions;
-  if (allowList.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false } // disable CORS for this request
-  }
-  callback(null, corsOptions) // callback expects two parameters: error and options
-}
-*/
 
 app.use(compression());
-app.use(cors());
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // preflight support
 
-// Parse incoming request bodies in a middleware before your handlers
+// Parse incoming request bodies
 app.use(bodyParser.json({ limit: 150000 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -125,12 +90,22 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something broke!');
 });
 
+// ---- DOMAIN CHECK + DB CONNECT ----
+const pools = {};
 app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
+  }
+
   var host = req.hostname;
   if (host == 'localhost') {
-    host = req.get('Referer').slice(0, -1);
-  }
-  else {
+    host = req.get('Referer')?.slice(0, -1);
+  } else {
     host = 'https://' + host;
   }
 
@@ -148,7 +123,6 @@ app.use((req, res, next) => {
     return;
   }
 
-  // Use MongoDB Atlas connection string from environment variable
   const mongoUri = process.env.MONGODB_URI || `mongodb://127.0.0.1:27017`;
   const dbName = databases[host];
   const client = new MongoClient(mongoUri);
@@ -166,6 +140,7 @@ app.use((req, res, next) => {
     });
 });
 
+// ---- ROUTES ----
 app.get('/download_users', (req, res) => {
   const filePath = path.join(__dirname, '../data/student_template.xlsx');
   res.sendFile(filePath);
@@ -175,14 +150,12 @@ app.get('/download_user_list', async (req, res) => {
   try {
     const user = await apis.validate('/admin/download_user_list', req.database, { user: req.query });
     if (!user) {
-      fs.appendFileSync(logFileName(), txn + ':' + 'Unauthorized access: ' + txn + '\n');
-      fs.appendFileSync(logFileName(), JSON.stringify(req.body) + '\n');
+      fs.appendFileSync(logFileName(), 'Unauthorized access: download_user_list\n');
       res.status(500).send('Not authorised');
       return;
     }
 
     const gameKey = req.query.game_key;
-
     const db = req.database;
     const games = db.collection('games');
     const users = db.collection('users');
@@ -190,7 +163,6 @@ app.get('/download_user_list', async (req, res) => {
 
     const game = await games.findOne({ key: gameKey });
     if (!game) {
-      fs.appendFileSync(logFileName(), 'download_user_list: game not found: ' + gameKey + '\n');
       res.status(500).send('Invalid data');
       return;
     }
@@ -205,22 +177,14 @@ app.get('/download_user_list', async (req, res) => {
     await workbook.xlsx.readFile(templatePath);
 
     const worksheet = workbook.worksheets[0];
-
-    const headings = ['Roll Number', 'Name', 'Email', 'Team', 'Market'];
     let rowIdx = 2;
 
-    list.forEach((user, idx) => {
-        const row = worksheet.getRow(rowIdx++);
-        row.getCell(1).value = user.roll_no;
-        row.getCell(2).value = user.name;
-        row.getCell(3).value = user.email;
-
-        const templateRow = worksheet.getRow(2);
-        for (let colIdx = 1; colIdx <= headings.length; colIdx++) {
-            row.getCell(colIdx).style = templateRow.getCell(colIdx).style;
-        }
-
-        row.commit();
+    list.forEach((user) => {
+      const row = worksheet.getRow(rowIdx++);
+      row.getCell(1).value = user.roll_no;
+      row.getCell(2).value = user.name;
+      row.getCell(3).value = user.email;
+      row.commit();
     });
 
     await workbook.xlsx.writeFile(outputFilePath);
@@ -229,7 +193,6 @@ app.get('/download_user_list', async (req, res) => {
       fs.unlinkSync(outputFilePath);
     });
   } catch (err) {
-    fs.appendFileSync(logFileName(), 'download_user_list: Error generating file: ' + err.toString() + '\n');
     res.status(500).send('Failed to generate file');
   }
 });
@@ -247,32 +210,22 @@ app.post('/upload/*', upload.single('file'), async (req, res) => {
   _data.data = JSON.parse(_data.data);
 
   try {
-    var output = null;
     const user = await apis.validate(txn, req.database, req.body);
     if (!user) {
       res.json({ rc: 'Unauthorized access: ' + txn });
-      console.error('Unauthorized access: ' + txn);
-      fs.appendFileSync(logFileName(), txn + ':' + 'Unauthorized access: ' + txn + '\n');
       return;
     }
 
     req.body.user = user;
-
-    output = await uploads[txn].call(null, txn, req.database, _data, req.file);
+    const output = await uploads[txn].call(null, txn, req.database, _data, req.file);
     res.json(output);
   } catch (e) {
-    console.error(e.message);
     res.json({ rc: e.message });
-    const now = new Date();
-    fs.appendFileSync(logFileName(), JSON.stringify(e) + '\n');
   }
 });
 
-// Serve the API routes from the apiRouter module
 app.use('/api', async (req, res) => {
   if (!apis[req.url]) {
-    console.error('Invalid API:[' + req.url + '].');
-    fs.appendFileSync(logFileName(), 'Invalid API:[' + req.url + '].' + '\n');
     res.json({ rc: 'Invalid API:[' + req.url + '].' });
     return;
   }
@@ -280,45 +233,29 @@ app.use('/api', async (req, res) => {
   let start = Date.now();
   const txn = req.url;
 
-  fs.appendFileSync(logFileName(), 'api called: ' + txn + '\n');
   try {
     const user = await apis.validate(txn, req.database, req.body);
     if (!user) {
       res.json({ rc: 'Unauthorized access: ' + txn });
-      console.error('Unauthorized access: ' + txn);
-      fs.appendFileSync(logFileName(), txn + ':' + 'Unauthorized access: ' + txn + '\n');
-      fs.appendFileSync(logFileName(), JSON.stringify(req.body) + '\n');
-      let timeTaken = Date.now() - start;
-      fs.appendFileSync(logFileName(), txn + ':' + "Total time taken : " + timeTaken + " milliseconds" + '\n');
       return;
     }
 
     req.body.user = user;
-
     const output = await apis[txn].call(null, txn, req.database, io, req.body);
-    let timeTaken = Date.now() - start;
-    fs.appendFileSync(logFileName(), txn + ':' + "Total time taken : " + timeTaken + " milliseconds. Data size: " + Buffer.byteLength(JSON.stringify(output), 'utf8') + '\n');
-
     res.json(output);
   } catch (e) {
-    console.error('Exception: ' + e.message);
     res.json({ rc: e.message });
-    let timeTaken = Date.now() - start;
-    const now = new Date();
-    fs.appendFileSync(logFileName(), 'Exception: ' + txn + ':' + JSON.stringify(e) + '\n');
-    fs.appendFileSync(logFileName(), JSON.stringify(req.body) + '\n');
-    fs.appendFileSync(logFileName(), txn + ':' + "Total time taken : " + timeTaken + " milliseconds" + '\n');
   }
 });
 
-// Serve files from public folder
+// Static files
 app.use(express.static(path.join(__dirname, '../public')));
 
-// API status endpoint for health checks
+// Health check
 app.get('/', (req, res) => {
-  res.json({ 
-    status: 'success', 
-    message: 'Parasim Backend API is running', 
+  res.json({
+    status: 'success',
+    message: 'Parasim Backend API is running',
     version: '1.0.0',
     endpoints: {
       api: '/api/*',
@@ -328,43 +265,43 @@ app.get('/', (req, res) => {
   });
 });
 
-// Catch-all for undefined routes
+// Catch-all
 app.use('*', (req, res) => {
-  res.status(404).json({ 
-    rc: 'endpoint_not_found', 
+  res.status(404).json({
+    rc: 'endpoint_not_found',
     message: `Endpoint ${req.originalUrl} not found`,
     available_endpoints: ['/api/*', '/upload/*', '/download_*']
   });
 });
 
 const PORT = process.env.PORT || port;
-
 server.listen(PORT, () => {
   console.info(`Server listening on port ${PORT}`);
 });
 
-io = socketIo(server, { cors: { origin: Object.keys(databases) } });
-//io = socketIo(server);
+// ---- SOCKET.IO with CORS FIX ----
+io = socketIo(server, {
+  cors: {
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
 
 io.use((socket, next) => {
   try {
-    // Your custom error handling logic here
     next();
   } catch (e) {
-    console.error('Socket.IO Error:', JSON.stringify(e) + '\n');
-    const now = new Date();
+    console.error('Socket.IO Error:', JSON.stringify(e));
     fs.appendFileSync(logFileName(), JSON.stringify(e) + '\n');
   }
 });
 
 io.on('connection', (_socket) => {
   socket = _socket;
-  socket.on('disconnect', () => {
-  });
-
+  socket.on('disconnect', () => { });
   socket.on('error', error => {
     console.error('Socket.IO Error:', error);
-    const now = new Date();
     fs.appendFileSync(logFileName(), JSON.stringify(error) + '\n');
   });
 });
